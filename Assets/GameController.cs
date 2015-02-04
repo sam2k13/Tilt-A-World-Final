@@ -15,8 +15,10 @@ public class GameController : MonoBehaviour {
 	public Image pauseButton;
 	public Sprite [] pauseImages;
 	public GameObject pauseButtonObject;
+	private bool tmp;
 	// Use this for initialization
 	void Start () {
+		tmp = true;
 		pauseButtonObject.SetActive (false);
 		Time.timeScale = 1;
 		marble.GetComponent<MeshRenderer> ().material = ballMaterials [PlayerPrefs.GetInt ("Ball")];
@@ -25,9 +27,23 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (isPaused);
-		if (marble.transform.position.y < endGame) {
+
+			Debug.Log (isPaused);
+			if (marble.transform.position.y < endGame) {
+
+			if(tmp){
+			if(PlayerPrefs.GetInt("AdTime") == 1){
+				AdController.adControl.showAd();
+				PlayerPrefs.SetInt("AdTime",0);
+			}
+			else
+			{
+				PlayerPrefs.SetInt("AdTime",1);
+			}
+			}
+			tmp = false;
 			Time.timeScale = 0;
+
 			gameCanvas.SetActive(false);
 			gameOverCanvas.SetActive(true);
 			scoreText.text = "Score: " + scoreController.GetComponent<ScoreScript>().getScore();

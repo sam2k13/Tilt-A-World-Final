@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour {
 	//public float tiltAngle;
 	public GameObject menuCanvas;
 	public GameObject unlockCanvas;
+	public GameObject adController;
 	public Text highScoreText;
 	public Sprite [] unlockableBalls;
 	public Sprite lockedBall;
@@ -14,6 +15,7 @@ public class MenuController : MonoBehaviour {
 	private bool [] activeBalls;
 	// Use this for initialization
 	void Start () {
+		PlayerPrefs.SetString("World Ad","Wo");
 		Time.timeScale = 1;
 		currentBall = PlayerPrefs.GetInt ("Ball");
 		activeBalls = new bool[9];
@@ -22,6 +24,7 @@ public class MenuController : MonoBehaviour {
 		GooglePlayController.googlePlay.SignIn ();
 		FindActiveBalls ();
 		InitiateBalls ();
+
 	}
 	
 	// Update is called once per frame
@@ -41,34 +44,41 @@ public class MenuController : MonoBehaviour {
 		GooglePlayController.googlePlay.ShowLeaderboard ();
 	}
 	void FindActiveBalls(){
-		int counter = 0;
-		foreach(bool ball in activeBalls){
-			activeBalls[counter] = false;
-			counter +=1;
-		}
-		activeBalls [0] = true;
-		if (GameData.control.highScore >= 100) {
-			activeBalls[1] = true;
-			if (GameData.control.highScore >= 200) {
-				activeBalls[2] = true;
-				if (GameData.control.highScore >= 300) {
-					activeBalls[3] = true;
-					if (GameData.control.highScore >= 400) {
-						activeBalls[4] = true;
-						if (GameData.control.highScore >= 500) {
-							activeBalls[5] = true;
-							if (GameData.control.highScore >= 600) {
-								activeBalls[6] = true;
-								if (GameData.control.highScore >= 700) {
-									activeBalls[7] = true;
-									if (GameData.control.highScore >= 800) {
-										activeBalls[8] = true;
+				int counter = 0;
+				foreach (bool ball in activeBalls) {
+						activeBalls [counter] = false;
+						counter += 1;
+				}
+				activeBalls [0] = true;
+				if (GameData.control.highScore >= 100) {
+						activeBalls [1] = true;
+						if (GameData.control.highScore >= 200) {
+								activeBalls [2] = true;
+								if (GameData.control.highScore >= 300) {
+										activeBalls [3] = true;
+										if (GameData.control.highScore >= 400) {
+												activeBalls [4] = true;
+												if (GameData.control.highScore >= 500) {
+														activeBalls [5] = true;
+														if (GameData.control.highScore >= 600) {
+																activeBalls [6] = true;
+																if (GameData.control.highScore >= 700) {
+																		activeBalls [7] = true;
+																	if (GameData.control.highScore >= 800) {
+																				activeBalls [8] = true;
+								
 
 
-
-									}}}}}}}}
+																		}
+																}
+														}
+												}
+										}
+								}
+						}
 	
-	}
+				}
+		}
 
 	void InitiateBalls(){
 		int counter = 0;
